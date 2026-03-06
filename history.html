@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HidroSmart - Histórico</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
+                <path d="M12 2c-5.33 4.55-8 8.48-8 11.8 0 4.98 3.8 8.2 8 8.2s8-3.22 8-8.2c0-3.32-2.67-7.25-8-11.8z"/>
+            </svg>
+            <span>HidroSmart</span>
+        </div>
+        <a href="dashboard.html" style="color: white; text-decoration: none;">← Voltar</a>
+    </nav>
+
+    <main class="dashboard">
+        <h2 style="margin-bottom: 20px; color: var(--primary-blue);">Histórico de Consumo</h2>
+        
+        <div class="card stats-grid">
+            <div class="stat-item">
+                <span class="stat-label">Média Diária</span>
+                <span class="stat-value">245 L</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Total do Mês</span>
+                <span class="stat-value">7.3 m³</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Economia vs Mês Passado</span>
+                <span class="stat-value" style="color: var(--status-normal);">-12%</span>
+            </div>
+        </div>
+
+        <div class="card chart-card" style="height: 400px;">
+            <h3>Consumo dos Últimos 7 Dias</h3>
+            <canvas id="historyChart"></canvas>
+        </div>
+
+        <div class="card">
+            <h3>Registro Diário</h3>
+            <div id="dailyLog" style="margin-top: 15px;">
+                <!-- Gerado via JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Gráfico de barras - últimos 7 dias
+        const ctx = document.getElementById('historyChart');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                datasets: [{
+                    label: 'Litros consumidos',
+                    data: [210, 245, 198, 267, 189, 320, 245],
+                    backgroundColor: '#0288D1',
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        // Gera log diário
+        const days = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+        const logContainer = document.getElementById('dailyLog');
+        
+        for (let i = 6; i >= 0; i--) {
+            const d = new Date();
+            d.setDate(d.getDate() - i);
+            const consumption = Math.floor(Math.random() * 150) + 150;
+            const status = consumption < 200 ? 'excelente' : consumption < 300 ? 'normal' : 'alto';
+            const color = consumption < 200 ? '#4CAF50' : consumption < 300 ? '#FF9800' : '#F44336';
+            
+            logContainer.innerHTML += `
+                <div style="display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid #eee; align-items: center;">
+                    <div>
+                        <strong>${days[d.getDay()]}, ${d.getDate()}/${d.getMonth()+1}</strong>
+                        <span style="display: block; font-size: 0.9rem; color: #757575;">${consumption} litros</span>
+                    </div>
+                    <span style="color: ${color}; font-weight: 600; font-size: 0.9rem; text-transform: uppercase;">
+                        ${status}
+                    </span>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
