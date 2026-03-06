@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HidroSmart - Dicas de Economia</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .tip-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary-blue);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .tip-card.easy { border-left-color: #4CAF50; background: #E8F5E9; }
+        .tip-card.medium { border-left-color: #FF9800; background: #FFF3E0; }
+        .tip-card.hard { border-left-color: #F44336; background: #FFEBEE; }
+        
+        .tip-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .tip-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        .tip-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        .tip-meta {
+            display: flex;
+            gap: 15px;
+            margin-top: 12px;
+            font-size: 0.85rem;
+        }
+        .savings {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+        .difficulty {
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
+                <path d="M12 2c-5.33 4.55-8 8.48-8 11.8 0 4.98 3.8 8.2 8 8.2s8-3.22 8-8.2c0-3.32-2.67-7.25-8-11.8z"/>
+            </svg>
+            <span>HidroSmart</span>
+        </div>
+        <a href="dashboard.html" style="color: white; text-decoration: none;">← Voltar</a>
+    </nav>
+
+    <main class="dashboard">
+        <div class="card" style="text-align: center; background: #E8F5E9;">
+            <h3 style="color: #2E7D32;">💧 Economia Potencial</h3>
+            <p style="font-size: 3rem; font-weight: 700; color: #2E7D32; margin: 10px 0;">20%</p>
+            <p style="color: var(--text-secondary);">seguindo nossas dicas</p>
+        </div>
+
+        <h2 style="margin: 20px 0; color: var(--primary-blue);">Dicas de Economia</h2>
+
+        <div id="tipsContainer"></div>
+    </main>
+
+    <script>
+        const tips = [
+            {
+                icon: '🚿',
+                title: 'Feche a torneira ao escovar os dentes',
+                desc: 'Manter a torneira fechada durante a escovação pode economizar até 12 litros por dia.',
+                savings: '12 L/dia',
+                difficulty: 'easy',
+                diffText: 'Fácil'
+            },
+            {
+                icon: '🍳',
+                title: 'Reaproveite água da máquina de lavar',
+                desc: 'Use a água da última enxágue para limpar calçadas ou regar plantas.',
+                savings: '50 L/lavagem',
+                difficulty: 'medium',
+                diffText: 'Médio'
+            },
+            {
+                icon: '🌱',
+                title: 'Instale arejadores nas torneiras',
+                desc: 'Arejadores misturam ar com água, reduzindo o fluxo sem perder a pressão.',
+                savings: '30% na torneira',
+                difficulty: 'easy',
+                diffText: 'Fácil'
+            },
+            {
+                icon: '👕',
+                title: 'Tome banhos mais curtos',
+                desc: 'Reduzir o banho de 15 para 5 minutos economiza até 60 litros por banho.',
+                savings: '60 L/banho',
+                difficulty: 'easy',
+                diffText: 'Fácil'
+            },
+            {
+                icon: '💧',
+                title: 'Verifique vazamentos regularmente',
+                desc: 'Uma torneira pingando pode desperdiçar 46 litros por dia. Faça inspeções mensais.',
+                savings: '46 L/dia',
+                difficulty: 'easy',
+                diffText: 'Fácil'
+            }
+        ];
+
+        const container = document.getElementById('tipsContainer');
+        
+        tips.forEach(tip => {
+            container.innerHTML += `
+                <div class="tip-card ${tip.difficulty}">
+                    <div class="tip-icon">${tip.icon}</div>
+                    <div class="tip-title">${tip.title}</div>
+                    <div class="tip-desc">${tip.desc}</div>
+                    <div class="tip-meta">
+                        <span class="savings">💧 ${tip.savings}</span>
+                        <span class="difficulty">Nível: ${tip.diffText}</span>
+                    </div>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>
