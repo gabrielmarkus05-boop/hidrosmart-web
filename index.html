@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HidroSmart - Login</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="logo">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="#0288D1">
+                    <path d="M12 2c-5.33 4.55-8 8.48-8 11.8 0 4.98 3.8 8.2 8 8.2s8-3.22 8-8.2c0-3.32-2.67-7.25-8-11.8z"/>
+                </svg>
+                <h1>HidroSmart</h1>
+                <p>Monitoramento Inteligente de Água</p>
+            </div>
+            
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" placeholder="seu@email.com" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" placeholder="••••••" required minlength="4">
+                </div>
+                
+                <button type="submit" class="btn-primary">Entrar</button>
+                <a href="#" class="forgot-password">Esqueceu a senha?</a>
+            </form>
+            
+            <p class="version">v1.0 - MVP</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if (email.includes('@') && password.length >= 4) {
+                localStorage.setItem('user', email);
+                window.location.href = 'dashboard.html';
+            } else {
+                alert('Credenciais inválidas. Use e-mail válido e senha com 4+ caracteres.');
+            }
+        });
+    </script>
+</body>
+</html>
